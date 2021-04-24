@@ -19,7 +19,7 @@ const flash = require('connect-flash');
 		app.use(session({
 			secret: "igorfraga",
 			resave: true,
-			saveUninitialized: true
+			saveUninitialized: true 
 		}))
 		app.use(flash())
 	// Middlewares
