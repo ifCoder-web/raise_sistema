@@ -1,0 +1,120 @@
+{{!-- ESTILO CSS --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+
+{{!-- MODELO HTML --}}
+{{#data}}
+	<div class="container-fluid">
+		<div class="row">
+			<h2>Ordem de serviço</h2>
+			<div class="col-4"><strong>Número da O.S:</strong> {{number_order}}</div>
+			<div class="col-8"><strong>Data de abertura:</strong> <span class="format_date">{{abertura_data}}</span> {{abertura_data_hora}}</div>
+		</div>
+		<hr>
+
+		<h2>Equipamento</h2>
+		<div class="row">		
+			<div class="col-6"><strong>Descrição:</strong> {{equip_name}}</div>
+			<div class="col-6"><strong>Situação:</strong> <span id="situacao">{{equip_situa}}</span></div>
+		</div>
+		<div class="row">
+			<div class="col-4"><strong>Marca:</strong> {{equip_marca}}</div>
+			<div class="col-6"><strong>Modelo:</strong> {{equip_modelo}}</div>
+			<div class="col-2"><strong>S.N:</strong> {{equip_number}}</div>
+		</div>
+			<div class="row equip-proprio">
+				<div class="col-4"><strong>Valor de compra:</strong> R${{equip_prop_valor_aquis}}</div>
+				<div class="col-4"><strong>Valor de venda:</strong> R${{equip_prop_valor_venda}}</div>
+			</div>
+			<div class="row equip-cliente">
+				<div class="col-4"><strong>Cliente:</strong> {{nome_cliente}}</div>
+				<div class="col-3"><strong>Tel.:</strong> {{tel_cliente}}</div>
+				<div class="col-3"><strong>Email:</strong> {{email_cliente}}</div>
+				<div class="row">
+					<div class="col-12"><strong>Endereço:</strong> {{end_cliente}}</div>
+				</div>
+			</div>
+			
+		<hr>
+
+		<h2>Ocorrência</h2>
+		<div class="row">
+			<div class="col-4"><strong>Requisitante:</strong> {{ocor_requis}}</div>
+			<div class="col-4"><strong>Data:</strong> <span class="format_date">{{ocor_data}}</span> {{ocor_time}}</div>
+		</div>
+		<div class="row">
+			<div class="col-12"><strong>Descrição:</strong> {{ocor_descript}}</div>
+		</div>
+		<hr>
+
+		<h2>Mão de obra</h2>
+		<div class="row">
+			<div class="col-6"><strong>Técnico:</strong> {{serv_tec}}</div>
+			<div class="col-3"><strong>Tipo:</strong> {{serv_tipo}}</div>
+			<div class="col-3"><strong>Complexidade:</strong> {{serv_complex}}</div>
+		</div>
+		<div class="row">
+			<div class="col-12"><strong>Descrição:</strong> {{serv_descript}}</div>
+		</div>
+		<div class="row">
+			<div class="col-3"><strong>Início:</strong> <span class="format_date">{{serv_tempo_init}}</span> {{serv_tempo_init_time}}</div>
+			<div class="col-3"><strong>Fim:</strong> <span class="format_date">{{serv_tempo_fim}}</span> {{serv_tempo_fim_time}}</div>
+			<div class="col-3"><strong>Qtd. horas:</strong> {{serv_tempo_horas}}</div>
+		</div>
+		<div class="row">
+			<div class="col-3"><strong>Valor p/ hora:</strong> R${{serv_valor_p_hora}}</div>
+			<div class="col-3"><strong>Valor do serviço:</strong> R${{serv_valor_total}}</div>
+			<div class="col-3"><strong>Garantia:</strong> {{serv_garantia}}</div>
+			<div class="col-3"><strong>Destino:</strong> {{serv_destino}}</div>
+		</div>
+	</div>
+
+
+<form action="/download" method="POST">
+	<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+	<input type="submit" name="download" id="download" value="download">
+</form>
+<form action="/modificar" method="POST">
+	<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+	<input type="submit" name="update" id="update" value="update">
+</form>
+<form action="/delete" method="POST">
+	<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+	<input type="submit" name="delete" id="delete" value="delete">
+</form>
+
+{{/data}}
+
+<script type="text/javascript">
+	// FORMAT DATE
+		window.addEventListener('load', (e) => {
+
+			// FORMATENDO O TIPO DE DATAS
+				datas = document.querySelectorAll('.format_date');
+				var i = 0;
+
+				datas.forEach(function(){
+					var brut_data = datas[i].innerHTML.split("-");
+					datas[i].innerHTML = `${brut_data[2]}\/${brut_data[1]}\/${brut_data[0]}`;
+					i++
+				});
+
+			// CLIENTE/PRÓPRIO
+				const situacao = document.querySelector('#situacao')
+				const equip_proprio = document.querySelector('.equip-proprio')
+				const equip_cliente = document.querySelector('.equip-cliente')
+
+				if(situacao.innerHTML == "Próprio"){
+					equip_proprio.style.display = "flex";
+					equip_cliente.style.display = "none";
+				}else if(situacao.innerHTML == "Cliente"){
+					equip_proprio.style.display = "none";
+					equip_cliente.style.display = "flex";
+				}
+
+		});
+		
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

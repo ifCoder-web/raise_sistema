@@ -1,0 +1,19 @@
+<a href="/new_os"><button>Nova OS</button></a>
+{{!-- <a href="/my_list"><button>Lista de OS</button></a> --}}
+<a href="/adm/config"><button>Config.</button></a>
+<br>
+<hr>
+<br>
+<h1>minha lista de O.S's</h1>
+
+<section>
+	{{#each lista}}
+		<div class="os_item">
+			<a href="/view_os/{{_id}}">OS numero: {{number_order}} --- Nome: {{nome}}, data: {{data_local}}</a>
+			<form action="/delete" method="POST">
+				<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+				<input type="submit" name="delete" id="delete" value="delete">
+			</form>
+		</div>
+	{{/each}}
+</section>

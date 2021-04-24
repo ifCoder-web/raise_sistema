@@ -1,0 +1,243 @@
+{{!-- FORM SAVE --}}
+
+{{#data}}
+
+<div class="container">
+	<form id="princ_form" action="/save" method="post" name="form_os_create">
+
+	<fieldset class="mb-5">
+		<legend>Ordem de serviço</legend>
+
+		<div class="row mb-3">
+
+			<div class="col-6">
+				<label for="number_order" class="form-label">Número da O.S</label><br>
+				<input type="text" name="number_order" id="number_order" class="form-control" placeholder="N°" value="{{number_order}}" readonly>
+			</div>
+
+			<div class="col-4">
+				<div class="col"></div>
+				<label for="abertura_data" class="form-label">Abertura</label><br>
+				<input type="date" name="abertura_data" id="abertura_data" class="form-control" placeholder="dd/mm/aa" value="{{abertura_data}}">
+			</div>
+			<div class="col-2">
+				<label for="abertura_data_hora" class="form-label">Hora</label><br>
+				<input type="time" name="abertura_data_hora" id="abertura_data_hora" class="form-control" value="{{abertura_data_hora}}">
+			</div>
+
+		</div>
+	</fieldset>
+	<hr>
+	<fieldset class="mb-5">
+		<legend>Equipamento</legend>
+
+
+		<div class="row  mb-3">
+			<div class="col-6">
+				<label for="equip_name" class="form-label">Descrição</label><br>
+				<input type="text" name="equip_name" id="equip_name" class="form-control" placeholder="Nome" value="{{equip_name}}" autocomplete="on" maxlength="3000">
+			</div>
+			<div class="col-6">
+				<label for="equip_situa" class="form-label">Situação</label><br>
+				<select name="equip_situa" id="equip_situa" class="form-select situa_select">
+				  	<option value="Próprio" selected>Próprio</option>
+				  	<option value="Cliente">Cliente</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row  mb-3">
+			<div class="col-3">
+				<label for="equip_marca" class="form-label">Marca</label><br>
+				<input type="text" name="equip_marca" id="equip_marca" class="form-control" placeholder="Marca" value="{{equip_marca}}" autocomplete="on" maxlength="150">
+			</div>
+			<div class="col-6">
+				<label for="equip_modelo" class="form-label">Modelo</label><br>
+				<input type="text" name="equip_modelo" id="equip_modelo" class="form-control" placeholder="Modelo" value="{{equip_modelo}}" autocomplete="on" maxlength="150">
+			</div>
+			<div class="col-3">
+				<label for="equip_number" class="form-label">N° de série</label><br>
+				<input type="text" name="equip_number" id="equip_number" class="form-control" placeholder="SN" value="{{equip_number}}" maxlength="50">
+			</div>
+		</div>
+		
+		<div id="equip-proprio" class="row mb-3">
+			<div class="col-6">
+				<label for="equip_prop_valor_aquis" class="form-label">Valor de aquisição</label>
+				<div class="input-group flex-nowrap">
+					<span class="input-group-text" id="equip_prop_valor_aquis_icon">R$</span>
+					<input type="text" name="equip_prop_valor_aquis" id="equip_prop_valor_aquis" class="form-control input_moeda" placeholder="Valor" value="{{equip_prop_valor_aquis}}">
+				</div>
+			</div>
+			<div class="col-6">
+				<label for="equip_prop_valor_venda" class="form-label">Valor de venda</label>
+				<div class="input-group flex-nowrap">
+					<span class="input-group-text" id="equip_prop_valor_venda_icon">R$</span>
+					<input type="text" name="equip_prop_valor_venda" id="equip_prop_valor_venda" class="form-control input_moeda" placeholder="Valor" value="{{equip_prop_valor_venda}}">
+				</div>
+			</div>
+		</div>
+
+		<div id="equip-cliente">
+			<div class="row mb-3">
+				<div class="col">
+					<label for="nome_cliente" class="form-label">Cliente</label><br>
+					<input type="text" name="nome_cliente" id="nome_cliente" class="form-control" placeholder="Nome" value="{{nome_cliente}}" maxlength="150">
+				</div>
+				<div class="col">
+					<label for="tel_cliente" class="form-label">Telefone</label><br>
+					<input type="tel" name="tel_cliente" id="tel_cliente" class="form-control input_tel" placeholder="(00) 0 0000-0000" value="{{tel_cliente}}" maxlength="20">
+				</div>
+				<div class="col">
+					<label for="email_cliente" class="form-label">Email</label><br>
+					<input type="email" name="email_cliente" id="email_cliente" class="form-control" placeholder="name@example.com" value="{{email_cliente}}" maxlength="50">
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col">
+					<label for="end_cliente" class="form-label">Endereço</label><br>
+					<input type="text" name="end_cliente" id="end_cliente" class="form-control" value="{{end_cliente}}" maxlength="150">
+				</div>
+			</div>
+		</div>
+		
+		
+	</fieldset>
+
+	<hr>
+	<fieldset class="mb-5">
+		<legend>Ocorrência</legend>
+
+		<div class="row mb-3">
+			<div class="col-6">
+				<label for="ocor_requis" class="form-label">Requisitante</label><br>
+				<input type="text" name="ocor_requis" id="ocor_requis" class="form-control" placeholder="Nome" value="{{ocor_requis}}" autocomplete="on" maxlength="150">
+			</div>
+			<div class="col-4">
+				<label for="ocor_data" class="form-label">Data</label><br>
+				<input type="date" name="ocor_data" id="ocor_data" class="form-control" value="{{ocor_data}}">
+			</div>
+			<div class="col-2">
+				<label for="ocor_time" class="form-label">Hora</label><br>
+				<input type="time" name="ocor_time" id="ocor_time" class="form-control" value="{{ocor_time}}">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-12">
+				<label for="ocor_descript" class="form-label">Descrição</label><br>
+				<textarea name="ocor_descript" id="ocor_descript" class="form-control" value="{{ocor_descript}}" maxlength="4000"></textarea>
+			</div>
+		</div>
+			
+	</fieldset>
+	<hr>
+	<fieldset class="mb-5">
+		<legend>Mão de obra</legend>
+
+		<div class="row mb-3">
+			<div class="col-4">
+				<label for="serv_tec" class="form-label">Técnico</label><br>
+				<input type="text" name="serv_tec" id="serv_tec" class="form-control" placeholder="Nome" value="{{serv_tec}}" autocomplete="on" maxlength="150">
+			</div>
+			<div class="col-4">
+				<label for="serv_tipo" class="form-label">Tipo</label><br>
+				<select name="serv_tipo" id="serv_tipo" class="form-select">
+				  	<option value="Corretivo">Corretivo</option>
+				  	<option value="Preventivo">Preventivo</option>
+				</select>
+			</div>
+			<div class="col-4">
+				<label for="serv_complex" class="form-label">Complexidade</label><br>
+				<select name="serv_complex" id="serv_complex" class="form-select" aria-label="Default select example">
+				  	<option value="Fácil">Fácil</option>
+				  	<option selected value="Médio">Médio</option>
+				  	<option value="Difícil">Difícil</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<div class="col-12">
+				<label for="serv_descript" class="form-label">Descrição</label><br>
+				<textarea name="serv_descript" id="serv_descript" class="form-control" value="{{serv_descript}}" maxlength="4000"></textarea>
+			</div>
+		</div>
+
+
+		<div class="row mb-3">
+			<div class="col-3">
+				<label for="serv_tempo_init" class="form-label">Início</label><br>
+				<input type="date" name="serv_tempo_init" id="serv_tempo_init" class="form-control" value="{{serv_tempo_init}}">
+			</div>
+			<div class="col-2">
+					<label for="serv_tempo_init_time" class="form-label">Hora</label><br>
+					<input type="time" name="serv_tempo_init_time" id="serv_tempo_init_time" class="form-control hora_serv output_valor" value="{{serv_tempo_init_time}}">
+			</div>
+			<div class="col-3">
+				<label for="serv_tempo_fim" class="form-label">Fim</label><br>
+				<input type="date" name="serv_tempo_fim" id="serv_tempo_fim" class="form-control" value="{{serv_tempo_fim}}">
+			</div>
+			<div class="col-2">
+				<label for="serv_tempo_fim_time" class="form-label">Hora</label><br>
+				<input type="time" name="serv_tempo_fim_time" id="serv_tempo_fim_time" class="form-control hora_serv output_valor" value="{{serv_tempo_fim_time}}">
+			</div>
+			<div class="col-2">
+				<label for="serv_tempo_horas" class="form-label">Qtd. horas</label>
+				<div class="input-group flex-nowrap">
+					<input type="text" name="serv_tempo_horas" id="serv_tempo_horas" class="form-control" placeholder="0" readonly>
+					<span class="input-group-text" id="serv_tempo_horas_icon">h</span>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-3">
+				<label for="serv_valor_p_hora" class="form-label">Valor p/ hora</label>		
+				<div class="input-group flex-nowrap">
+					<span class="input-group-text" id="serv_valor_p_hora_icon">R$</span>
+					<input type="text" name="serv_valor_p_hora" id="serv_valor_p_hora" class="form-control input_moeda output_valor" placeholder="Valor">
+				</div>
+			</div>
+			<div class="col-3">
+				<label for="serv_valor_total" class="form-label">Valor do serviço</label>
+				<div class="input-group flex-nowrap">
+					<span class="input-group-text" id="serv_valor_total_icon">R$</span>
+					<input type="text" name="serv_valor_total" id="serv_valor_total" class="form-control input_moeda output_moeda"placeholder="Total" readonly>
+				</div>
+			</div>
+			<div class="col-3">
+				<label for="serv_garantia" class="form-label">Garantia</label>
+				<input type="text" name="serv_garantia" id="serv_garantia" class="form-control" placeholder="0" autocomplete="on" maxlength="30">
+			</div>
+			<div class="col-3">
+				<label for="serv_destino" class="form-label">Destino</label>
+				<input type="text" name="serv_destino" id="serv_destino" class="form-control" placeholder="Destino do equipamento" maxlength="50">
+			</div>
+
+		</div>
+
+	</fieldset>
+	<hr>
+	{{!-- <fieldset>
+		<legend>Anexo</legend>
+		<div class="row mb-3">
+			<div class="col-12">
+				<input id="file_anexo" type="file" name="imagem" class="form-control" multiple>
+			</div>
+		</div>
+	</fieldset> --}}
+
+
+		
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+		  <input type="submit" value="Salvar" class="btn btn-success">
+		</div>
+
+	</form>
+</div>
+{{/data}}
+
+{{!-- script form --}}
+
+<script src="js/create_os_form.js"></script>

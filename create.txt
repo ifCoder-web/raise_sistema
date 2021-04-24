@@ -1,0 +1,41 @@
+==== DADOS DA ORDEM DE SERVIÇO ====
+
+# N° da O.S
+
+# DATA/HORA 
+	Inicio/fim do serviço
+	Abertura/fechamento da O.S
+	Modificações
+
+# DADOS DO RESPOSAVEL/CLIENTE
+	Responsavel
+		Abertura/fechamento da O.S
+		Execução de seviço
+
+	Cliente
+
+# DADOS DO EQUIPAMENTO
+	Descrição do equipamento
+	Marca
+	Modelo
+	Fabricante
+	N° de série
+	Registro Anvisa
+	Situação
+		Proprio
+			Valor de aquisição
+			Valor de venda
+		Cliente
+			Valor do serviço
+			Garantia
+
+# SERVIÇO REALIZADO
+	Tipo de serviço
+	Descrição do problema inicial
+	Descrição do serviço realizado
+	Horas de serviço
+	Complexidade
+
+# ASSINATURAS
+
+# ANEXOS
