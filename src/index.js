@@ -176,14 +176,47 @@ const _validate = require('./functions/_form_validate.js')
 	})
 
 	// UPDATE O.D
-	app.post('/update', urlencodedParser, async (req, res) => {
+	app.post('/update/:id', urlencodedParser, async (req, res) => {
 	//CONSULTA BANCO DE DADOS
-		await db.updateOne({_id: req.body.id_os},{
-			nome: req.body.nome,
-			sobrenome: req.body.sobrenome
+		await db.updateOne({_id: req.params.id},{
+			// Ordem
+				number_order: req.body.number_order,
+				abertura_data: req.body.abertura_data,
+				abertura_data_hora: req.body.abertura_data_hora,
+			// Equipamento
+				equip_name: req.body.equip_name,
+				equip_situa: req.body.equip_situa,
+				equip_marca: req.body.equip_marca,
+				equip_modelo: req.body.equip_modelo,
+				equip_number: req.body.equip_number,
+				equip_prop_valor_aquis: req.body.equip_prop_valor_aquis,
+				equip_prop_valor_venda: req.body.equip_prop_valor_venda,
+				nome_cliente: req.body.nome_cliente,
+				tel_cliente: req.body.tel_cliente,
+				email_cliente: req.body.email_cliente,
+				end_cliente: req.body.end_cliente,
+			// Ocorrencia
+				ocor_requis: req.body.ocor_requis,
+				ocor_data: req.body.ocor_data,
+				ocor_time: req.body.ocor_time,
+				ocor_descript: req.body.ocor_descript,
+			// Mão de obra
+				serv_tec: req.body.serv_tec,
+				serv_tipo: req.body.serv_tipo,
+				serv_complex: req.body.serv_complex,
+				serv_descript: req.body.serv_descript,
+				serv_tempo_init: req.body.serv_tempo_init,
+				serv_tempo_init_time: req.body.serv_tempo_init_time,
+				serv_tempo_fim: req.body.serv_tempo_fim,
+				serv_tempo_fim_time: req.body.serv_tempo_fim_time,
+				serv_tempo_horas: req.body.serv_tempo_horas,
+				serv_valor_p_hora: req.body.serv_valor_p_hora,
+				serv_valor_total: req.body.serv_valor_total,
+				serv_garantia: req.body.serv_garantia,
+				serv_destino: req.body.serv_destino
 		}).then(() => {
 			console.log("Modificado!")
-			res.redirect('/view_os/'+req.body.id_os);
+			res.redirect('/view_os/'+req.params.id);
 		}).catch((err) => {
 			console.error("Erro ao modificar o registro! "+err)
 		})
@@ -232,7 +265,7 @@ const _validate = require('./functions/_form_validate.js')
 			// GERA O PDF
 				let options = { format: 'A4', path: "./meupdf.pdf" };
 				let file = {content: conteudo};
-				pdf.generatePdf(file, options).then(pdfBuffer => {
+				await pdf.generatePdf(file, options).then(pdfBuffer => {
 				  console.log("PDF Buffer:-", pdfBuffer);
 				});
 			// Redireciona para a pagina anterior		
@@ -245,7 +278,10 @@ const _validate = require('./functions/_form_validate.js')
 
 	app.post('/modificar', urlencodedParser, (req, res) =>{
 		db.find({_id: req.body.id_os}).then(async (data)=> {
-			res.render("update_os", {data: data.map(data => data.toJSON())})
+			res.render("update_os", {
+				data: data.map(data => data.toJSON()),
+				id: req.body.id_os
+			})
 		}).catch((err) => {
 			console.log("Erro ao modificar: "+err)
 		})

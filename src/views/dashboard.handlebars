@@ -1,19 +1,40 @@
-<a href="/new_os"><button>Nova OS</button></a>
-{{!-- <a href="/my_list"><button>Lista de OS</button></a> --}}
-<a href="/adm/config"><button>Config.</button></a>
-<br>
-<hr>
-<br>
-<h1>minha lista de O.S's</h1>
+<div class="container">
+	<a href="/new_os"><button class="btn btn-success">Nova OS</button></a>
+	{{!-- <a href="/my_list"><button>Lista de OS</button></a> --}}
+	<a href="/adm/config"><button class="btn btn-secondary">Config.</button></a>
+	<hr>
+	<h1 class="fs-3">MINHAS ORDENS DE SERVIÇO</h1>
 
-<section>
-	{{#each lista}}
-		<div class="os_item">
-			<a href="/view_os/{{_id}}">OS numero: {{number_order}} --- Nome: {{nome}}, data: {{data_local}}</a>
-			<form action="/delete" method="POST">
-				<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
-				<input type="submit" name="delete" id="delete" value="delete">
-			</form>
+	<div class="card">
+		<div class="card-body bg-light bg-gradient">
+			<section>
+				{{#each lista}}
+
+					<div class="os_item">
+						<div class="list-group">
+							<a href="/view_os/{{_id}}" class="list-group-item list-group-item-action my-2">
+								<h3 class="fs-5">O.S número: {{number_order}}</h3>
+								<p>Equipamento: {{equip_name}}, data: {{abertura_data}} {{abertura_data_hora}}</p>
+								<div class="row my-2">
+									<form action="/modificar" class="col-sm-3 col-lg-2" method="POST">
+										<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+										<input type="submit" name="modificar" id="modificar" class="form-control btn btn-primary mt-1" value="Modificar">
+									</form>
+									<form action="/delete" class="col-sm-3 col-lg-2" method="POST">
+										<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
+										<input type="submit" name="delete" id="delete" class="form-control btn btn-danger mt-1" value="Deletar">
+									</form>
+								</div>
+							</a>
+						</div>
+					</div>
+
+				{{/each}}
+			</section>
 		</div>
-	{{/each}}
-</section>
+	</div>
+	
+</div>
+
+
+

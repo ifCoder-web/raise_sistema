@@ -3,7 +3,7 @@
 {{#data}}
 
 <div class="container">
-	<form id="princ_form" action="/save" method="post" name="form_os_create">
+	<form id="princ_form" action="/update/{{_id}}" method="post" name="form_os_create">
 
 	<fieldset class="mb-5">
 		<legend>Ordem de serviço</legend>
@@ -12,17 +12,17 @@
 
 			<div class="col-6">
 				<label for="number_order" class="form-label">Número da O.S</label><br>
-				<input type="text" name="number_order" id="number_order" class="form-control" placeholder="N°" value="{{number_order}}" readonly>
+				<input type="text" name="number_order" id="number_order" class="form-control" placeholder="N°" value="{{number_order}}" readonly required>
 			</div>
 
 			<div class="col-4">
 				<div class="col"></div>
 				<label for="abertura_data" class="form-label">Abertura</label><br>
-				<input type="date" name="abertura_data" id="abertura_data" class="form-control" placeholder="dd/mm/aa" value="{{abertura_data}}">
+				<input type="date" name="abertura_data" id="abertura_data" class="form-control" placeholder="dd/mm/aa" value="{{abertura_data}}" required>
 			</div>
 			<div class="col-2">
 				<label for="abertura_data_hora" class="form-label">Hora</label><br>
-				<input type="time" name="abertura_data_hora" id="abertura_data_hora" class="form-control" value="{{abertura_data_hora}}">
+				<input type="time" name="abertura_data_hora" id="abertura_data_hora" class="form-control" value="{{abertura_data_hora}}" required>
 			</div>
 
 		</div>
@@ -39,9 +39,9 @@
 			</div>
 			<div class="col-6">
 				<label for="equip_situa" class="form-label">Situação</label><br>
-				<select name="equip_situa" id="equip_situa" class="form-select situa_select">
-				  	<option value="proprio" selected>Próprio</option>
-				  	<option value="cliente">Cliente</option>
+				<select name="equip_situa" id="equip_situa" class="form-select situa_select" required>
+				  	<option value="Próprio">Próprio</option>
+				  	<option value="Cliente">Cliente</option>
 				</select>
 			</div>
 		</div>
@@ -111,15 +111,15 @@
 		<div class="row mb-3">
 			<div class="col-6">
 				<label for="ocor_requis" class="form-label">Requisitante</label><br>
-				<input type="text" name="ocor_requis" id="ocor_requis" class="form-control" placeholder="Nome" value="{{ocor_requis}}" autocomplete="on" maxlength="150">
+				<input type="text" name="ocor_requis" id="ocor_requis" class="form-control" placeholder="Nome" value="{{ocor_requis}}" autocomplete="on" maxlength="150" required>
 			</div>
 			<div class="col-4">
 				<label for="ocor_data" class="form-label">Data</label><br>
-				<input type="date" name="ocor_data" id="ocor_data" class="form-control" value="{{ocor_data}}">
+				<input type="date" name="ocor_data" id="ocor_data" class="form-control" value="{{ocor_data}}" required>
 			</div>
 			<div class="col-2">
 				<label for="ocor_time" class="form-label">Hora</label><br>
-				<input type="time" name="ocor_time" id="ocor_time" class="form-control" value="{{ocor_time}}">
+				<input type="time" name="ocor_time" id="ocor_time" class="form-control" value="{{ocor_time}}" required>
 			</div>
 		</div>
 		<div class="row mb-3">
@@ -137,20 +137,20 @@
 		<div class="row mb-3">
 			<div class="col-4">
 				<label for="serv_tec" class="form-label">Técnico</label><br>
-				<input type="text" name="serv_tec" id="serv_tec" class="form-control" placeholder="Nome" value="{{serv_tec}}" autocomplete="on" maxlength="150">
+				<input type="text" name="serv_tec" id="serv_tec" class="form-control" placeholder="Nome" value="{{serv_tec}}" autocomplete="on" maxlength="150" required>
 			</div>
 			<div class="col-4">
 				<label for="serv_tipo" class="form-label">Tipo</label><br>
-				<select name="serv_tipo" id="serv_tipo" class="form-select">
+				<select name="serv_tipo" id="serv_tipo" class="form-select" required>
 				  	<option value="corretivo">Corretivo</option>
 				  	<option value="preventivo">Preventivo</option>
 				</select>
 			</div>
 			<div class="col-4">
 				<label for="serv_complex" class="form-label">Complexidade</label><br>
-				<select name="serv_complex" id="serv_complex" class="form-select" aria-label="Default select example">
+				<select name="serv_complex" id="serv_complex" class="form-select" aria-label="Default select example" required>
 				  	<option value="Fácil">Fácil</option>
-				  	<option selected value="Médio">Médio</option>
+				  	<option value="Médio">Médio</option>
 				  	<option value="Difícil">Difícil</option>
 				</select>
 			</div>
@@ -167,19 +167,19 @@
 		<div class="row mb-3">
 			<div class="col-3">
 				<label for="serv_tempo_init" class="form-label">Início</label><br>
-				<input type="date" name="serv_tempo_init" id="serv_tempo_init" class="form-control" value="{{serv_tempo_init}}">
+				<input type="date" name="serv_tempo_init" id="serv_tempo_init" class="form-control" value="{{serv_tempo_init}}" required> 
 			</div>
 			<div class="col-2">
 					<label for="serv_tempo_init_time" class="form-label">Hora</label><br>
-					<input type="time" name="serv_tempo_init_time" id="serv_tempo_init_time" class="form-control hora_serv output_valor" value="{{serv_tempo_init_time}}">
+					<input type="time" name="serv_tempo_init_time" id="serv_tempo_init_time" class="form-control hora_serv output_valor" value="{{serv_tempo_init_time}}" required>
 			</div>
 			<div class="col-3">
 				<label for="serv_tempo_fim" class="form-label">Fim</label><br>
-				<input type="date" name="serv_tempo_fim" id="serv_tempo_fim" class="form-control" value="{{serv_tempo_fim}}">
+				<input type="date" name="serv_tempo_fim" id="serv_tempo_fim" class="form-control" value="{{serv_tempo_fim}}" required>
 			</div>
 			<div class="col-2">
 				<label for="serv_tempo_fim_time" class="form-label">Hora</label><br>
-				<input type="time" name="serv_tempo_fim_time" id="serv_tempo_fim_time" class="form-control hora_serv output_valor" value="{{serv_tempo_fim_time}}">
+				<input type="time" name="serv_tempo_fim_time" id="serv_tempo_fim_time" class="form-control hora_serv output_valor" value="{{serv_tempo_fim_time}}" required>
 			</div>
 			<div class="col-2">
 				<label for="serv_tempo_horas" class="form-label">Qtd. horas</label>
@@ -231,7 +231,7 @@
 
 		
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-		  <input type="submit" value="Salvar" class="btn btn-success">
+		  	<input type="submit" value="Salvar" class="btn btn-success">
 		</div>
 
 	</form>

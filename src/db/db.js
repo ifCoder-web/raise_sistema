@@ -33,7 +33,7 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			equip_name: {
 				type: String,
 				required: true,
-				default: "No name"
+				default: "--"
 			},
 			equip_situa: {
 				type: String,
@@ -41,17 +41,14 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			},
 			equip_marca: {
 				type: String,
-				required: true,
-				default: "No name"
+				default: "--"
 			},
 			equip_modelo: {
 				type: String,
-				required: true,
-				default: "No name"
+				default: "--"
 			},
 			equip_number: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 			equip_prop_valor_aquis: {
@@ -94,7 +91,6 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			},
 			ocor_descript: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 		// Mão de obra
@@ -115,7 +111,6 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			},
 			serv_descript: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 			serv_tempo_init: {
@@ -141,22 +136,18 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			},
 			serv_valor_p_hora: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 			serv_valor_total: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 			serv_garantia: {
 				type: String,
-				required: true,
 				default: "--"
 			},
 			serv_destino: {
 				type: String,
-				required: true,
 				default: "--"
 			}
 
