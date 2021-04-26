@@ -37,7 +37,7 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 			},
 			equip_situa: {
 				type: String,
-				required: true
+				default: "--"
 			},
 			equip_marca: {
 				type: String,

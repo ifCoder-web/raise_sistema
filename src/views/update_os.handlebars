@@ -2,7 +2,7 @@
 
 {{#data}}
 
-<div class="container">
+
 	<form id="princ_form" action="/update/{{_id}}" method="post" name="form_os_create">
 
 	<fieldset class="mb-5">
@@ -35,7 +35,7 @@
 		<div class="row  mb-3">
 			<div class="col-6">
 				<label for="equip_name" class="form-label">Descrição</label><br>
-				<input type="text" name="equip_name" id="equip_name" class="form-control" placeholder="Nome" value="{{equip_name}}" autocomplete="on" maxlength="3000">
+				<input type="text" name="equip_name" id="equip_name" class="form-control" placeholder="Nome" value="{{equip_name}}" autocomplete="on" maxlength="300" required>
 			</div>
 			<div class="col-6">
 				<label for="equip_situa" class="form-label">Situação</label><br>
@@ -195,14 +195,14 @@
 			<div class="col-3">
 				<label for="serv_valor_p_hora" class="form-label">Valor p/ hora</label>		
 				<div class="input-group flex-nowrap">
-					<span class="input-group-text" id="serv_valor_p_hora_icon">R$</span>
+					<span class="input-group-text" id="serv_valor_p_hora_icon">R$ </span>
 					<input type="text" name="serv_valor_p_hora" id="serv_valor_p_hora" class="form-control input_moeda output_valor" placeholder="Valor" value="{{serv_valor_p_hora}}">
 				</div>
 			</div>
 			<div class="col-3">
 				<label for="serv_valor_total" class="form-label">Valor do serviço</label>
 				<div class="input-group flex-nowrap">
-					<span class="input-group-text" id="serv_valor_total_icon">R$</span>
+					<span class="input-group-text" id="serv_valor_total_icon">R$ </span>
 					<input type="text" name="serv_valor_total" id="serv_valor_total" class="form-control input_moeda output_moeda"placeholder="Total" readonly>
 				</div>
 			</div>
@@ -235,7 +235,7 @@
 		</div>
 
 	</form>
-</div>
+
 {{/data}}
 
 {{!-- script form --}}

@@ -2,7 +2,7 @@
 
 {{#data}}
 
-<div class="container">
+
 	<form id="princ_form" action="/save" method="post" name="form_os_create">
 
 	<fieldset class="mb-5">
@@ -35,7 +35,7 @@
 		<div class="row  mb-3">
 			<div class="col-6">
 				<label for="equip_name" class="form-label">Descrição</label><br>
-				<input type="text" name="equip_name" id="equip_name" class="form-control" placeholder="Nome" value="{{equip_name}}" autocomplete="on" maxlength="3000" required>
+				<input type="text" name="equip_name" id="equip_name" class="form-control" placeholder="Nome" value="{{equip_name}}" autocomplete="on" maxlength="300" required>
 			</div>
 			<div class="col-6">
 				<label for="equip_situa" class="form-label">Situação</label><br>
@@ -235,7 +235,7 @@
 		</div>
 
 	</form>
-</div>
+
 {{/data}}
 
 {{!-- script form --}}

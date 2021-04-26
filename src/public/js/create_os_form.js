@@ -118,15 +118,15 @@ let equip_prop_valor_aquis = document.querySelector("#equip_prop_valor_aquis")
 		
 	}, true)
 
-	form.addEventListener('blur', (e) => {
-		let element = e.target
-		let element_value = element.value
-		let element_id = null
-		if(element.getAttribute("id")) { element_id = element.getAttribute("id") }
+	// form.addEventListener('blur', (e) => {
+	// 	let element = e.target
+	// 	let element_value = element.value
+	// 	let element_id = null
+	// 	if(element.getAttribute("id")) { element_id = element.getAttribute("id") }
 			
-		// EVENTS
-		if(element.classList.contains("input_moeda")) fix_moeda(element_value, element_id, element)
-	})
+	// 	// EVENTS
+	// 	if(element.classList.contains("input_moeda")) fix_moeda(element_value, element_id, element)
+	// })
 
 	form.addEventListener('change', (e) => {
 		let element = e.target

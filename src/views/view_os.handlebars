@@ -7,12 +7,17 @@
 		opacity: 0.6;
 		font-size: 1.3rem;
 	}
+	.container-pdf{
+		max-width: 770px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 </style>
 
 
 {{!-- MODELO HTML --}}
 {{#data}}
-	<div class="container-fluid">
+	<div class="container-pdf">
 		<h2 class="text-center my-4">ORDEM DE SERVIÇO</h2>
 		<div class="card">
 			<div class="card-body">
@@ -115,15 +120,15 @@
 		<div class="row my-4">
 			<form class="col-2" action="/download" method="POST">
 				<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
-				<input type="submit" name="download" id="download" class="form-control btn btn-success" value="download">
+				<input type="submit" name="download" id="download" class="form-control btn btn-success" value="Download">
 			</form>
 			<form class="col-2" action="/modificar" method="POST">
 				<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
-				<input type="submit" name="update" id="update" class="form-control btn btn-primary" value="update">
+				<input type="submit" name="update" id="update" class="form-control btn btn-primary" value="Update">
 			</form>
 			<form class="col-2" action="/delete" method="POST">
 				<input type="hidden" name="id_os" id="id_os" value="{{_id}}">
-				<input type="submit" name="delete" id="delete" class="form-control btn btn-danger" value="delete">
+				<input type="submit" name="delete" id="delete" class="form-control btn btn-danger" value="Delete">
 			</form>
 		</div>
 
