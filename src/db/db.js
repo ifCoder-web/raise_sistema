@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
+const db = require('../config/db.js')
 
 // CONNECT
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+mongoose.connect(db.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
 	console.log("Banco Connected!")
 }).catch((err) => {
 	console.error(`houve um erro ${err}`)
@@ -158,6 +159,14 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 	const Ordem = mongoose.model('Ordem', ordemSchema);
 
 // DOCUMENT const doc = new Model({dfsf: dsfsf})
+
+
+
+
+
+
+
+
 
 	
 
