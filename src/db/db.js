@@ -4,7 +4,7 @@ const db = require('../config/db.js')
 
 // CONNECT
 mongoose.Promise = global.Promise;
-mongoose.connect(db.mongoURI).then(() => {
+mongoose.connect(db.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
 	console.log("Banco Connected!")
 }).catch((err) => {
 	console.error(`houve um erro ${err}`)
