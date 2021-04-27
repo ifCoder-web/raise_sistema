@@ -9,6 +9,9 @@ const bodyParser = require('body-parser');
 const pdf = require('html-pdf-node');
 const session = require('express-session');
 const flash = require('connect-flash');
+const bcrypt = require('bcryptjs')
+const passport = require("passport")
+require("./config/auth.js")(passport)
 // const request = require('request-promise');
 // const cheerio = require('cheerio');
 // const fetch = require('node-fetch');
@@ -21,15 +24,17 @@ const flash = require('connect-flash');
 			resave: true,
 			saveUninitialized: true 
 		}))
+		app.use(passport.initialize())
+		app.use(passport.session())
 		app.use(flash())
 	// Middlewares
 		app.use((req, res, next) => {
 			res.locals.success_msg = req.flash("success_msg");
 			res.locals.error_msg = req.flash("error_msg");
+			res.locals.error = req.flash("error")
+			res.locals.user = req.user || null
 			next()
 		})
-		const _crud = require('./middlewares/crud.js')
-		const _auth = require('./middlewares/auth.js')
 
 	// View Engine
 		app.set("views", path.join(__dirname, "views/"));
@@ -44,7 +49,10 @@ const flash = require('connect-flash');
 		let conteudo = 'No content';
 	// PUBLIC
 		app.use(express.static(path.join(__dirname,"/public")))
-
+	// USER
+		const User = require("./db/models/user.js")
+	// HELPERS
+		const {checkAuth} = require("./helpers/checkAuth.js")
 
 // BANCO DE DADOS
 const db = require('./db/db.js')
@@ -55,11 +63,67 @@ const db = require('./db/db.js')
 	// const dashboard = require('./routers/dashboard.js')
 	// app.use('/dashboard', rota)
 
-	app.get('/', (req, res) => {
-		res.render('home.handlebars')
+	// CRIA USUARIO
+
+	// app.get('/creauser', (req, res) => {
+	// 	const novouser = new User({
+	// 		name: 'Igor Fraga',
+	// 		email: 'igor_ir6@hotmail.com',
+	// 		password: 'laranja92'
+	// 	})
+
+	// 	// BCRYPT
+	// 		bcrypt.genSalt(10, (err, salt) => {
+	// 			bcrypt.hash(novouser.password, salt, (err, hash) => {
+	// 				if(err){
+	// 					console.log("erro ao gerar o hash"+err)
+	// 					req.flash("error_msg", "erro ao gerar o hash")
+	// 					res.redirect('/')
+	// 				}else{
+	// 					novouser.password = hash
+
+	// 					// SAVE DOCUMENT
+	// 						novouser.save(async (err, dados) => {
+	// 							if(err){
+	// 								req.flash("error_msg", "Houve um erro ao salvar o usuario!")
+	// 								res.redirect('/')
+	// 								return console.error(err)
+	// 							} 
+								
+	// 							console.log('Salvo! id: ')
+	// 							req.flash("success_msg", "Usuario cadastrado com sucesso!")
+	// 							// REDIRECT
+	// 							res.redirect('/')
+	// 						})	
+
+	// 				}
+	// 			})
+	// 		})
+
+	// })
+
+
+
+	// AUTHENTICATION
+	app.post('/login', urlencodedParser, (req, res, next) => {
+		passport.authenticate("local", {
+			successRedirect: "/dashboard",
+			failureRedirect: "/",
+			failureFlash: true
+		})(req, res, next)
 	})
 
-	app.get('/dashboard', (req, res) => {
+	app.use('/logout', checkAuth, (req, res) => {
+		req.logout()
+		req.flash("success_msg", "Deslogado com sucesso!")
+		res.redirect("/")
+	})
+
+	app.get('/', (req, res) => {
+		res.render('login.handlebars')
+	})
+
+	app.get('/dashboard', checkAuth, (req, res) => {
 		// CONSULTANDO BANCO DE DADOS
 			db.find().sort({_id: -1}).then((lista) => {
 				res.render('dashboard.handlebars', {
@@ -71,7 +135,7 @@ const db = require('./db/db.js')
 	})
 
 	// GERA A ORDEM DE SERVIÇO
-	app.get('/new_os', (req, res) => {
+	app.get('/new_os', checkAuth, (req, res) => {
 
 		var num_new_os = 0
 
@@ -103,7 +167,7 @@ const db = require('./db/db.js')
 	})
 
 	// CONFIG
-	app.get('/adm/config', (req, res) => {
+	app.get('/adm/config', checkAuth, (req, res) => {
 		res.render('config.handlebars')
 	})	
 
@@ -113,7 +177,7 @@ const db = require('./db/db.js')
 // CRUD
 
 	// SALVANDO DADOS
-	app.post('/save', urlencodedParser, async (req, res) => {
+	app.post('/save', checkAuth, urlencodedParser, async (req, res) => {
 		var erros = []
 
 		// VALIDAÇÃO
@@ -233,7 +297,7 @@ const db = require('./db/db.js')
 	})
 
 	// UPDATE O.D
-	app.post('/update/:id', urlencodedParser, async (req, res) => {
+	app.post('/update/:id', checkAuth, urlencodedParser, async (req, res) => {
 
 		var erros = []
 
@@ -346,7 +410,7 @@ const db = require('./db/db.js')
 	})
 
 	// DELETE O.S
-	app.post('/delete', urlencodedParser, (req, res) => {
+	app.post('/delete', checkAuth, urlencodedParser, (req, res) => {
 	//CONSULTA BANCO DE DADOS
 		db.deleteOne({_id: req.body.id_os}).then(async (data)=> {
 			req.flash("success_msg", "Ordem de Serviço deletada com sucesso!")
@@ -361,7 +425,7 @@ const db = require('./db/db.js')
 
 
 // VIEW O.S
-	app.get('/view_os/:id', (req, res) => {
+	app.get('/view_os/:id', checkAuth, (req, res) => {
 	//CONSULTA BANCO DE DADOS
 		db.find({_id: req.params.id}).then(async (data)=> {
 			res.render('view_os',{
@@ -376,7 +440,7 @@ const db = require('./db/db.js')
 
 
 	// BAIXA O ARQUIVO FORMATADO
-	app.post('/download', urlencodedParser, (req, res) => {
+	app.post('/download', checkAuth, urlencodedParser, (req, res) => {
 		// pesquisa a o.s no banco de dados a partir do _id
 		db.find({_id: req.body.id_os}).then(async (data)=> {
 			// Renderiza a pagina com o handlebars e armazena a renderização na variavel "conteudo"
@@ -406,7 +470,7 @@ const db = require('./db/db.js')
 		})
 	})
 
-	app.post('/modificar', urlencodedParser, (req, res) =>{
+	app.post('/modificar', checkAuth, urlencodedParser, (req, res) =>{
 		db.find({_id: req.body.id_os}).then(async (data)=> {
 			res.render("update_os", {
 				data: data.map(data => data.toJSON()),

@@ -159,6 +159,14 @@ mongoose.connect("mongodb://localhost:27017/sistema1", {useNewUrlParser: true, u
 
 // DOCUMENT const doc = new Model({dfsf: dsfsf})
 
+
+
+
+
+
+
+
+
 	
 
 // SAVE DOCUMENT 
