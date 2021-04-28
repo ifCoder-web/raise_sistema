@@ -453,13 +453,13 @@ const db = require('./db/db.js')
    			});
 			// GERA O PDF
 				//let options = { format: 'A4', path: process.cwd() || "./meupdf.pdf" };
-				let options = { format: 'A4', path: "./src/public/serviceorder.pdf" };
+				let options = { format: 'A4', path: path.join(__dirname, "public/serviceorder.pdf") };
 				let file = {content: conteudo};
 				await pdf.generatePdf(file, options).then(pdfBuffer => {
 				  	console.log("PDF Buffer:-", pdfBuffer);
 				  	req.flash("success_msg", "PDF gerado com sucesso!")
-				  	// res.redirect('/serviceorder.pdf')
-				  	res.sendFile(path.join(__dirname, "public/serviceorder.pdf"))
+				  	res.redirect('/serviceorder.pdf')
+				  	// res.sendFile(path.join(__dirname, "public/serviceorder.pdf"))
 				}).catch((err) => {
 					req.flash("error_msg", "Houve um erro ao gerar o arquivo!"+ err)
 					console.error('Houve um erro ao gerar o arquivo! '+ err)
