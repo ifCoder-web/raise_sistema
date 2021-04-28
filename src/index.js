@@ -452,7 +452,8 @@ const db = require('./db/db.js')
    				console.error('Erro ao salvar o modelo na variavel \'contetuo\': '+ err)
    			});
 			// GERA O PDF
-				let options = { format: 'A4', path: "./meupdf.pdf" };
+				//let options = { format: 'A4', path: process.cwd() || "./meupdf.pdf" };
+				let options = { format: 'A4', name: "teste.pdf" };
 				let file = {content: conteudo};
 				await pdf.generatePdf(file, options).then(pdfBuffer => {
 				  	console.log("PDF Buffer:-", pdfBuffer);
