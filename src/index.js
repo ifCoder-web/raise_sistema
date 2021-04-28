@@ -453,7 +453,7 @@ const db = require('./db/db.js')
    			});
 			// GERA O PDF
 				//let options = { format: 'A4', path: process.cwd() || "./meupdf.pdf" };
-				let options = { format: 'A4', path: path.join(__dirname, "public/serviceorder.pdf") };
+				let options = { format: 'A4', path: path.join(__dirname, "/serviceorder.pdf") };
 				let file = {content: conteudo};
 				await pdf.generatePdf(file, options).then(pdfBuffer => {
 				  	console.log("PDF Buffer:-", pdfBuffer);
